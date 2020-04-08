@@ -2,12 +2,7 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": [".storybook/**", "src/stories/**"]
-      }
-    ]
+    "import/no-extraneous-dependencies": 0
   },
 
   "env": {
