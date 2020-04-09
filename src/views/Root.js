@@ -6,15 +6,15 @@ import Tweets from 'views/Tweets';
 import Articles from 'views/Articles';
 
 const Root = () => (
-  <MainTemplate>
-    <BrowserRouter>
+  <BrowserRouter>
+    <MainTemplate>
       <Switch>
         <Route exact path="/" component={Notes} />
         <Route path="/articles" component={Articles} />
         <Route path="/tweets" component={Tweets} />
       </Switch>
-    </BrowserRouter>
-  </MainTemplate>
+    </MainTemplate>
+  </BrowserRouter>
 );
 
 export default Root;

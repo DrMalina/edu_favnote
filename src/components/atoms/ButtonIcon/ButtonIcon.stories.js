@@ -9,7 +9,7 @@ import ButtonIcon from './ButtonIcon';
 
 export default {
   component: ButtonIcon,
-  title: 'ButtonIcon',
+  title: 'Atoms/ButtonIcon',
   decorators: [(story) => <YellowBackground>{story()}</YellowBackground>],
 };
 
