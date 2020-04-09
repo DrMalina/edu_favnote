@@ -8,7 +8,7 @@ export default {
   decorators: [withKnobs],
 };
 
-export const primary = () => {
+export const Primary = () => {
   const label = 'Colors';
   const options = {
     Primary: 'hsl(49, 100%, 58%)',
@@ -22,4 +22,4 @@ export const primary = () => {
 
   return <Button color={value}>Hello Button</Button>;
 };
-export const secondary = () => <Button secondary>Hello Button</Button>;
+export const Secondary = () => <Button secondary>Hello Button</Button>;
