@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { removeItem as removeItemAction } from 'actions';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
@@ -78,14 +80,23 @@ class Card extends React.Component {
 
   render() {
     const { redirect } = this.state;
-    const { id, cardType, title, created, content, twitterName, articleUrl } = this.props;
+    const {
+      id,
+      cardType,
+      title,
+      created,
+      twitterName,
+      articleUrl,
+      content,
+      removeItem,
+    } = this.props;
 
     if (redirect) {
       return <Redirect to={`${cardType}/${id}`} />;
     }
     return (
-      <StyledWrapper onClick={this.handleCardClick}>
-        <InnerWrapper activeColor={cardType}>
+      <StyledWrapper>
+        <InnerWrapper activeColor={cardType} onClick={this.handleCardClick}>
           <StyledHeading>{title}</StyledHeading>
           <DateInfo>{created}</DateInfo>
           {cardType === 'tweets' && (
@@ -95,7 +106,9 @@ class Card extends React.Component {
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
-          <Button secondary>REMOVE</Button>
+          <Button onClick={() => removeItem(cardType, id)} secondary>
+            REMOVE
+          </Button>
         </InnerWrapper>
       </StyledWrapper>
     );
@@ -110,6 +123,7 @@ Card.propTypes = {
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
+  removeItem: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {
@@ -118,4 +132,8 @@ Card.defaultProps = {
   articleUrl: null,
 };
 
-export default Card;
+const mapDispatchToProps = (dispatch) => ({
+  removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
+});
+
+export default connect(null, mapDispatchToProps)(Card);
