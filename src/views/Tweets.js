@@ -1,43 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 
-const tweets = [
-  {
-    id: 1,
-    title: 'Hello Roman',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '1 day',
-    twitterName: 'hello_roman',
-  },
-  {
-    id: 2,
-    title: 'Redux guy',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '1 day',
-    twitterName: 'dan_abramov',
-  },
-  {
-    id: 3,
-    title: 'React router stuff',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '5 days',
-    twitterName: 'mjackson',
-  },
-  {
-    id: 4,
-    title: 'Super animacje!',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '10 days',
-    twitterName: 'sarah_edo',
-  },
-];
-
-const Tweets = () => (
+const Tweets = ({ tweets }) => (
   <GridTemplate pageType="tweets">
     {tweets.map(({ title, content, twitterName, created, id }) => (
       <Card
@@ -53,4 +20,22 @@ const Tweets = () => (
   </GridTemplate>
 );
 
-export default Tweets;
+Tweets.propTypes = {
+  tweets: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      twitterName: PropTypes.string.isRequired,
+      created: PropTypes.string.isRequired,
+    }),
+  ),
+};
+
+Tweets.defaultProps = {
+  tweets: [],
+};
+
+const mapStateToProps = ({ tweets }) => ({ tweets });
+
+export default connect(mapStateToProps)(Tweets);
