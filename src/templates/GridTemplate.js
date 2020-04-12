@@ -56,7 +56,9 @@ const StyledButtonIcon = styled(ButtonIcon)`
 const GridTemplate = ({ children, pageContext }) => {
   const [isNewItemBarVisible, setNewItemBarVisibility] = useState(false);
 
-  const handleNewItemBarToggle = () => setNewItemBarVisibility(!isNewItemBarVisible);
+  const toggleNewItemBar = () => setNewItemBarVisibility(!isNewItemBarVisible);
+
+  const closeNewItemBar = () => setNewItemBarVisibility(false);
 
   return (
     <UserPageTemplate>
@@ -69,12 +71,8 @@ const GridTemplate = ({ children, pageContext }) => {
           <StyledParagraph>6 {pageContext}</StyledParagraph>
         </StyledPageHeader>
         <StyledGrid>{children}</StyledGrid>
-        <StyledButtonIcon
-          icon={plusIcon}
-          activeColor={pageContext}
-          onClick={handleNewItemBarToggle}
-        />
-        <NewItemBar isVisible={isNewItemBarVisible} />
+        <StyledButtonIcon icon={plusIcon} activeColor={pageContext} onClick={toggleNewItemBar} />
+        <NewItemBar handleClose={closeNewItemBar} isVisible={isNewItemBarVisible} />
       </StyledWrapper>
     </UserPageTemplate>
   );
